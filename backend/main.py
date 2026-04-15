@@ -19,7 +19,14 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='repla
 from google import genai
 from google.genai import types as genai_types
 
-GEMINI_API_KEY = "AIzaSyBDz-soAXHAdwy20jJS09706B1SRse-93c"
+import os
+try:
+    from dotenv import load_dotenv
+    load_dotenv()  # Load variables from .env file if it exists
+except ImportError:
+    pass
+
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 client = genai.Client(api_key=GEMINI_API_KEY)
 GEMINI_MODEL = "gemini-flash-latest"
 
