@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JanAI – Smart City Intelligence Platform</title>
+    <meta name="description" content="AI-powered citizen platform integrating education, healthcare, safety routing, crime reporting, and fraud detection for Indian cities." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="/assets/styles.css" />
+  </head>
+  <body>
+
+    <!-- Animated background blobs -->
+    <div class="bg-fx" aria-hidden="true">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+    </div>
+
+    <div class="page-shell">
+
+      <!-- Header / Hero -->
+      <header class="hero glass-card">
+        <nav class="topbar">
+          <div class="brand">
+            <div class="brand-mark">
+              <span>J</span>
+            </div>
+            <div class="brand-text">
+              <span class="eyebrow">People-Centered Smart City</span>
+              <h1>JanAI <span class="brand-tag">v2.0</span></h1>
+            </div>
+          </div>
+          <div class="nav-right">
+            <div class="ai-badge">
+              <span class="ai-dot"></span>
+              Gemini AI Live
+            </div>
+            <span class="status-pill">India 🇮🇳</span>
+          </div>
+        </nav>
+
+        <div class="hero-content">
+          <div class="hero-left">
+            <p class="section-label">Unified Civic Intelligence</p>
+            <h2>India's smartest city platform — powered by AI & real data.</h2>
+            <p class="hero-copy">
+              Every query goes live to <strong>Google Gemini 1.5 Flash</strong>. Real colleges, real hospitals, real routes — zero fake data. Navigation via OpenStreetMap + OSRM. Crime intelligence via NLP.
+            </p>
+            <div class="hero-stats">
+              <div class="stat-chip">🎓 Education AI</div>
+              <div class="stat-chip">🚑 Medical Triage</div>
+              <div class="stat-chip">🗺️ Live Routing</div>
+              <div class="stat-chip">🚨 Crime Filing</div>
+              <div class="stat-chip">💳 Fraud Detection</div>
+              <div class="stat-chip">📡 City Analytics</div>
+            </div>
+            <div class="hero-actions">
+              <a href="#workspace" class="primary-btn"><span>Explore Platform</span> →</a>
+              <a href="#modules" class="ghost-btn">See Modules</a>
+            </div>
+          </div>
+
+          <aside class="hero-right">
+            <div class="live-panel">
+              <div class="live-panel-header">
+                <span class="pulse-dot"></span>
+                Live Intelligence Engine
+              </div>
+              <div class="live-stat">
+                <span class="live-num" id="modules-count">06</span>
+                <span>Active civic intelligence modules</span>
+              </div>
+              <div class="live-divider"></div>
+              <ul class="live-list">
+                <li><span class="li-dot green"></span> Gemini API connected</li>
+                <li><span class="li-dot green"></span> OpenStreetMap streaming</li>
+                <li><span class="li-dot green"></span> OSRM routing active</li>
+                <li><span class="li-dot amber"></span> NLP triage enabled</li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </header>
+
+      <!-- Module Cards -->
+      <section id="modules" class="module-section">
+        <p class="section-label center-label">Platform Modules</p>
+        <div class="module-grid">
+          <article class="module-card" data-tab="education">
+            <div class="mc-icon edu">🎓</div>
+            <h3>Education Finder</h3>
+            <p>AI-ranked real colleges by course, city & budget — with scholarship suggestions.</p>
+            <span class="mc-link">Explore →</span>
+          </article>
+          <article class="module-card" data-tab="healthcare">
+            <div class="mc-icon health">🏥</div>
+            <h3>Hospital Triage</h3>
+            <p>Describe symptoms — Gemini classifies urgency and locates nearest specialists.</p>
+            <span class="mc-link">Explore →</span>
+          </article>
+          <article class="module-card" data-tab="safety">
+            <div class="mc-icon safety">🛡️</div>
+            <h3>Safe Routing</h3>
+            <p>AI risk scoring on lighting, crime & crowd. Real road paths via OSRM API.</p>
+            <span class="mc-link">Explore →</span>
+          </article>
+          <article class="module-card" data-tab="crime">
+            <div class="mc-icon crime">🚨</div>
+            <h3>Online Crime Report</h3>
+            <p>File incident in plain English. LLM classifies, escalates, and guides victim.</p>
+            <span class="mc-link">Explore →</span>
+          </article>
+          <article class="module-card" data-tab="fraud">
+            <div class="mc-icon fraud">🔍</div>
+            <h3>Anti-Fraud Scanner</h3>
+            <p>Paste any SMS/link. Gemini identifies psycho-linguistic manipulation tactics.</p>
+            <span class="mc-link">Explore →</span>
+          </article>
+          <article class="module-card" data-tab="analytics">
+            <div class="mc-icon analytics">📡</div>
+            <h3>City Heat Map</h3>
+            <p>AI-generated crime density analytics overlaid live on OpenStreetMap.</p>
+            <span class="mc-link">Explore →</span>
+          </article>
+        </div>
+      </section>
+
+      <!-- Main Workspace -->
+      <section id="workspace" class="workspace glass-card">
+        <!-- Tab Bar -->
+        <div class="tabs-bar">
+          <button class="tab-btn active" data-tab="education">🎓 Education</button>
+          <button class="tab-btn" data-tab="healthcare">🏥 Healthcare</button>
+          <button class="tab-btn" data-tab="safety">🛡️ Safe Route</button>
+          <button class="tab-btn" data-tab="crime">🚨 File Report</button>
+          <button class="tab-btn" data-tab="fraud">🔍 Fraud Check</button>
+          <button class="tab-btn" data-tab="analytics">📡 Analytics</button>
+        </div>
+
+        <div class="split-layout">
+          <!-- Left: Forms + Results -->
+          <div class="split-left" id="split-left">
+
+            <!-- Education -->
+            <div class="tab-panel active" id="tab-education">
+              <div class="panel-heading">
+                <h3>🎓 College & School Finder</h3>
+                <p class="panel-sub">Gemini AI recommends real institutions based on your profile.</p>
+              </div>
+              <form id="education-form" class="smart-form">
+                <div class="form-group">
+                  <label>📍 Your City</label>
+                  <input type="text" name="location" value="Delhi" required placeholder="e.g. Mumbai, Bengaluru" />
+                </div>
+                <div class="form-group">
+                  <label>📚 Course / Program</label>
+                  <input type="text" name="course" value="Computer Science" required placeholder="e.g. MBBS, B.Tech, MBA" />
+                </div>
+                <div class="form-group">
+                  <label>💰 Annual Budget (INR)</label>
+                  <input type="number" name="budget" value="150000" required min="10000" />
+                </div>
+                <button type="submit" class="submit-btn">
+                  <span class="btn-text">Find Colleges</span>
+                  <span class="btn-icon">🚀</span>
+                </button>
+              </form>
+              <div id="education-results" class="results-area"></div>
+            </div>
+
+            <!-- Healthcare -->
+            <div class="tab-panel" id="tab-healthcare">
+              <div class="panel-heading">
+                <h3>🏥 Medical Triage & Hospital Finder</h3>
+                <p class="panel-sub">Describe symptoms — Gemini classifies urgency and recommends specialists.</p>
+              </div>
+              <form id="healthcare-form" class="smart-form">
+                <div class="form-group">
+                  <label>📍 Current City</label>
+                  <input type="text" name="location" value="Delhi" required placeholder="e.g. Chennai, Hyderabad" />
+                </div>
+                <div class="form-group">
+                  <label>🩺 Describe Symptoms</label>
+                  <textarea name="symptoms" rows="4" required placeholder="e.g. Fever since 3 days, difficulty breathing, chest tightness...">Chest pain with shortness of breath, feeling dizzy and sweating</textarea>
+                </div>
+                <button type="submit" class="submit-btn">
+                  <span class="btn-text">Assess & Find Hospitals</span>
+                  <span class="btn-icon">🏥</span>
+                </button>
+              </form>
+              <div id="healthcare-results" class="results-area"></div>
+            </div>
+
+            <!-- Safety -->
+            <div class="tab-panel" id="tab-safety">
+              <div class="panel-heading">
+                <h3>🛡️ Women's Safety & Smart Navigation</h3>
+                <p class="panel-sub">Routes are scored on crime risk, lighting and crowd density. Real paths drawn with OSRM.</p>
+              </div>
+              <form id="safety-form" class="smart-form">
+                <div class="form-group">
+                  <label>📍 Source / From</label>
+                  <input type="text" name="source" value="Connaught Place, Delhi" required />
+                </div>
+                <div class="form-group">
+                  <label>🏁 Destination / To</label>
+                  <input type="text" name="destination" value="Lajpat Nagar, Delhi" required />
+                </div>
+                <div class="form-group">
+                  <label>🕐 Time of Travel</label>
+                  <select name="time_of_day">
+                    <option value="Morning">Morning (6AM–10AM)</option>
+                    <option value="Afternoon">Afternoon (10AM–5PM)</option>
+                    <option value="Evening" selected>Evening (5PM–9PM)</option>
+                    <option value="Night">Night (9PM–12AM)</option>
+                    <option value="Late Night">Late Night (12AM–6AM)</option>
+                  </select>
+                </div>
+                <button type="submit" class="submit-btn">
+                  <span class="btn-text">Plan Safe Route</span>
+                  <span class="btn-icon">🗺️</span>
+                </button>
+              </form>
+              <div id="safety-results" class="results-area"></div>
+            </div>
+
+            <!-- Crime Report -->
+            <div class="tab-panel" id="tab-crime">
+              <div class="panel-heading">
+                <h3>🚨 Online Crime / FIR Report</h3>
+                <p class="panel-sub">Describe what happened in your own words. Our AI classifies, generates your report and guides you through next steps.</p>
+              </div>
+              <form id="crime-form" class="smart-form">
+                <div class="form-group">
+                  <label>📍 Incident Location</label>
+                  <input type="text" name="location" value="New Delhi Railway Station, Delhi" required />
+                </div>
+                <div class="form-group">
+                  <label>📝 Describe the Incident</label>
+                  <textarea name="description" rows="5" required placeholder="Describe what happened in your own words...">My mobile phone was snatched from my hand while I was walking out of the metro station exit gate. The person ran towards the parking area.</textarea>
+                </div>
+                <div class="form-group">
+                  <label>📞 Contact Number (optional)</label>
+                  <input type="tel" name="contact" placeholder="+91 XXXXX XXXXX" />
+                </div>
+                <button type="submit" class="submit-btn danger-btn">
+                  <span class="btn-text">File Complaint</span>
+                  <span class="btn-icon">🚨</span>
+                </button>
+              </form>
+              <div id="crime-results" class="results-area"></div>
+            </div>
+
+            <!-- Fraud -->
+            <div class="tab-panel" id="tab-fraud">
+              <div class="panel-heading">
+                <h3>🔍 Anti-Fraud & Scam Detection</h3>
+                <p class="panel-sub">Paste any SMS, WhatsApp message, email, or link. Gemini scans for manipulation tactics.</p>
+              </div>
+              <form id="fraud-form" class="smart-form">
+                <div class="form-group">
+                  <label>📋 Suspicious Content</label>
+                  <textarea name="content" rows="6" required placeholder="Paste the suspicious SMS, email, or message here...">URGENT: Your SBI account will be blocked. Verify your KYC at http://sbi-kyc-update.xyz immediately. Call 1234567890 to avoid account suspension. - SBI Alert</textarea>
+                </div>
+                <button type="submit" class="submit-btn fraud-btn">
+                  <span class="btn-text">Scan for Fraud</span>
+                  <span class="btn-icon">🔍</span>
+                </button>
+              </form>
+              <div id="fraud-results" class="results-area"></div>
+            </div>
+
+            <!-- Analytics -->
+            <div class="tab-panel" id="tab-analytics">
+              <div class="panel-heading">
+                <h3>📡 Safe City Analytics Dashboard</h3>
+                <p class="panel-sub">AI-generated real-time crime density report for your city, rendered on live map.</p>
+              </div>
+              <div class="analytics-controls">
+                <div class="form-group">
+                  <label>🏙️ Select City</label>
+                  <select id="analytics-city">
+                    <option value="Delhi">Delhi</option>
+                    <option value="Mumbai">Mumbai</option>
+                    <option value="Bengaluru">Bengaluru</option>
+                    <option value="Chennai">Chennai</option>
+                    <option value="Hyderabad">Hyderabad</option>
+                    <option value="Kolkata">Kolkata</option>
+                    <option value="Pune">Pune</option>
+                    <option value="Jaipur">Jaipur</option>
+                  </select>
+                </div>
+                <button id="load-analytics-btn" class="submit-btn analytics-btn">
+                  <span class="btn-text">Generate Report</span>
+                  <span class="btn-icon">📡</span>
+                </button>
+              </div>
+              <div id="analytics-results" class="results-area"></div>
+            </div>
+
+          </div>
+
+          <!-- Right: Interactive Map -->
+          <div class="split-right">
+            <div class="map-container">
+              <div class="map-topbar">
+                <span class="map-label">🗺️ OpenStreetMap</span>
+                <span class="map-status" id="map-status">Ready</span>
+              </div>
+              <div id="map-view"></div>
+              <div class="map-legend" id="map-legend" style="display:none">
+                <span class="legend-item"><span class="ldot blue"></span> Route</span>
+                <span class="legend-item"><span class="ldot green"></span> Institution</span>
+                <span class="legend-item"><span class="ldot red"></span> Incident</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="ai-loading" id="ai-loading" style="display:none">
+      <div class="ai-spinner">
+        <div class="spinner-ring"></div>
+        <div class="spinner-text">Gemini AI Processing...</div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="/assets/app.js"></script>
+  </body>
+</html>
